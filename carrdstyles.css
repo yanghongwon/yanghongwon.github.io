@@ -1,0 +1,31 @@
+:root {
+    --font: Arial, sans-serif;
+    --title: Times New Roman, serif;
+    --accent: #a9bba6;
+    --width: 350px;
+    --padding: 0.45rem;
+    --fontSize: 0.8rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: var(--fontSize);
+    font-family: var(--font);
+}
+
+h1, h2 {
+    font-size: calc(var(--fontSize) + 0.3rem);
+    font-family: var(--title);
+}
+
+#top {
+    border: 1px solid var(--accent);
+    padding: var(--padding);
+    font-family: var(--font);
+    font-size: var(--fontSize);
+}
