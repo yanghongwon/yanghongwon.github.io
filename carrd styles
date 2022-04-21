@@ -1,0 +1,19 @@
+:root {
+    --accent: #d2a1a1;
+    --font: 'Nunito', Arial, sans-serif;
+    --fontSize: 0.8rem;
+    --title: 'Playfair Display', Times New Roman, serif;
+    --padding: 0.4em;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: rgba(210, 161, 161, 0.7);
+    font-family: var(--font);
+    font-size: var(--fontSize);
+}
