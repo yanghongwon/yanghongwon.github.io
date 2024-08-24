@@ -417,22 +417,28 @@ button[role="tab"][aria-selected="true"] .tab-title {
     padding-block-start: 0.5rem;
 }
 
-.project .list .char-name::before {
+.project .list .name::before {
     font-family: 'Phosphor-Bold';
     margin-inline-end: 5px;
     color: var(--clr-accent-2);
+    font-size: calc(var(--fs-body) + 0.15rem);
+    translate: 0 -0.1rem;
     float: left;
 }
 
-.project-ships .list .char-name::before {
-    content: '\e2a8';
-}
-
-.project-char .char-name::before {
+.char-name::before {
     content: '\e4c2';
 }
 
-.project .list .char-desc::before {
+.work-name::before {
+    content: '\e0ea';
+}
+
+.ship-name::before {
+    content: '\e2a8';
+}
+
+.project .list .desc::before {
     content: '—';
     margin-inline-end: 5px;
 }
