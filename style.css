@@ -280,7 +280,7 @@ button {
     transition: var(--sidebar-transition);
 }
 
-button[role="tab"] {
+button[role="tab"], div[role="series-group"] {
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
@@ -300,12 +300,21 @@ button[role="tab"]:last-of-type {
     border: 0;
 }
 
-button .tab-title {
+div[role="series-group"] button[role="tab"] {
+    border: 0;
+    padding: 0;
+}
+
+div[role="series-group"] button[role="tab"]:last-of-type {
+    padding-block-end: 0.5rem;
+}
+
+button .tab-title, div[role="series-group"] .series-title {
     font-weight: 700;
     font-size: calc(var(--fs-body) + 0.1rem);
 }
 
-button[role="tab"][aria-selected="true"] .tab-title::before, button[role="tab"][aria-selected="false"] .tab-title::before {
+button[role="tab"][aria-selected="true"] .tab-title::before, button[role="tab"][aria-selected="false"] .tab-title::before, div[role="series-group"] .series-title::before {
     float: left;
     translate: 0 0.2rem;
     font-size: calc(var(--fs-body) + 0.25rem);
@@ -322,8 +331,19 @@ button[role="tab"][aria-selected="false"] .tab-title::before {
     content: '\e0e2';
 }
 
+div[role="series-group"] .series-title::before {
+    content: '\e2f0';
+    translate: 0 -0.2rem;
+}
+
 button[role="tab"][aria-selected="true"] .tab-title {
     color: var(--clr-accent-2);
+}
+
+button.series-work .tab-title {
+    margin-inline-start: 1rem;
+    border-left: 1px solid var(--clr-borders);
+    padding-inline-start: 1rem;
 }
 
 .project-top {
