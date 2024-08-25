@@ -295,14 +295,17 @@ button[role="tab"]:first-of-type {
     padding-block-start: 0;
 }
 
-button[role="tab"]:last-of-type {
-    padding-block-end: 0;
-    border: 0;
+div[role="series-group"] {
+    gap: 0.3rem;
 }
 
 div[role="series-group"] button[role="tab"] {
-    border: 0;
     padding: 0;
+    border: 0;
+}
+
+div[role="series-group"] button[role="tab"]:first-of-type {
+    padding-block-start: 0.5rem;
 }
 
 div[role="series-group"] button[role="tab"]:last-of-type {
@@ -341,7 +344,7 @@ button[role="tab"][aria-selected="true"] .tab-title {
 }
 
 button.series-work .tab-title {
-    margin-inline-start: 1rem;
+    margin-inline-start: 0.5rem;
     border-left: 1px solid var(--clr-borders);
     padding-inline-start: 1rem;
 }
