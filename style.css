@@ -300,7 +300,7 @@ div[role="series-group"] {
 }
 
 div[role="series-group"] button[role="tab"] {
-    padding-block: 0;
+    padding-block: 0rem;
     border: 0;
 }
 
@@ -529,7 +529,7 @@ button.series-work .tab-title {
     text-align: center;
 }
 
-@media screen and (width >= 1080px) {
+@media screen and (width >= 1095px) {
     .button-group {
         translate: 100% 0;
     }
@@ -540,7 +540,7 @@ button.series-work .tab-title {
 }
 
 @media screen and (width <= 800px) {
-    .topbar, .tab-container {
+    .tab-container {
         margin-left: 0!important;
     }
 
