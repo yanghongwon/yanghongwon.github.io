@@ -357,7 +357,7 @@ button.series-work .tab-title {
 .project-title {
     margin-left: auto;
     text-align: right;
-    background: linear-gradient(to right, rgba(from var(--clr-container) r g b / 0.7), rgba(from var(--clr-container) r g b / 0.4)), linear-gradient(to right, hsl(from var(--clr-container) h s l / 0.7), hsl(from var(--clr-container) h s l / 0.4));
+    background: linear-gradient(to right, hsl(from var(--clr-container) h s l / 0.7), hsl(from var(--clr-container) h s l / 0.4));
     padding: 1rem;
     border-radius: 0.3rem;
 }
