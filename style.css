@@ -451,7 +451,6 @@ button.series-work .tab-title {
 
 .project .list .term {
     font-weight: 700;
-    font-size: calc(var(--fs-body) + 0.15rem);
 }
 
 .char-name::before {
