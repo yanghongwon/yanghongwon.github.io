@@ -449,12 +449,13 @@ button.series-work .tab-title {
     float: left;
 }
 
-.char-name::before {
-    content: '\e4c2';
+.project .list .term {
+    font-weight: 700;
+    font-size: calc(var(--fs-body) + 0.15rem);
 }
 
-.work-name::before {
-    content: '\e0ea';
+.char-name::before {
+    content: '\e4c2';
 }
 
 .ship-name::before {
