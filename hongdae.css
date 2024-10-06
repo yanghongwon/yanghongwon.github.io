@@ -520,7 +520,7 @@ button[role="tab"][aria-selected="true"] i {
 }
 
 .ship-list > * {
-    flex: 1 1 calc((var(--container-size) - var(--sidebar-size) - 1rem) / 2.2);
+    flex: 1 1 calc((var(--container-size) - var(--sidebar-size) - var(--gutter)) / 2.2);
     align-self: stretch;
 }
 
