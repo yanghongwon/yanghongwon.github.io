@@ -173,7 +173,7 @@ button {
 
 .container-content {
     grid-area: 'content';
-    width: calc(var(--container-size) - var(--sidebar-size) - 1rem);
+    width: calc(var(--container-size) - var(--sidebar-size) - var(--gutter);
 }
 
 .container-sidebar {
