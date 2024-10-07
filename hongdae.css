@@ -287,6 +287,10 @@ button[role="tab"][aria-selected="true"] i {
     color: var(--clr-text);
 }
 
+button[role="tab"] .text {
+    white-space: nowrap;
+}
+
 .block {
     margin-block: 2rem;
 }
