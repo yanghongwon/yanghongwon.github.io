@@ -467,6 +467,10 @@ button[role="tab"] .text {
     background: var(--clr-container);
 }
 
+.read-wrapper + .read-text {
+    margin-block-start: 1rem;
+}
+
 .qa-item {
     display: inline-flex;
     align-items: start;
