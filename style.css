@@ -283,16 +283,11 @@ button {
 button[role="tab"], div[role="series-group"] {
     display: flex;
     flex-direction: column;
-    flex: 1 1 auto;
     gap: 1rem;
-    padding-block: 0.5rem 1rem;
+    padding-block: 0 1rem;
     border-bottom: 1px solid var(--clr-borders);
     text-align: left;
     text-wrap: balance;
-}
-
-button[role="tab"]:first-of-type {
-    padding-block-start: 0;
 }
 
 div[role="series-group"] {
@@ -451,6 +446,7 @@ button.series-work .tab-title {
 
 .project .list .term {
     font-weight: 700;
+    font-size: calc(var(--fs-body) + 0.15rem);
 }
 
 .char-name::before {
