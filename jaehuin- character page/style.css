@@ -72,6 +72,15 @@ img {
     object-fit: cover;
 }
 
+iframe.tmblr-iframe {
+    filter: invert(100%);
+    transform: scale(0.7, 0.7);
+}
+
+.dark iframe.tmblr-iframe {
+    filter: invert(0);
+}
+
 .light-mode {
     display: var(--light-mode);
 }
