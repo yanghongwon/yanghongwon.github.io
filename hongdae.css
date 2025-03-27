@@ -4,13 +4,44 @@
     box-sizing: border-box;
 }
 
-.tmblr-iframe {
+iframe.tmblr-iframe {
     transform: scale(0.75);
+    visibility: hidden;
+    opacity: 0;
+    filter: var(--controls);
+    translate: -1.4rem 0.3rem;
+}
+
+iframe.tmblr-iframe.active {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.dark iframe.tmblr-iframe {
     filter: var(--controls);
 }
 
-.dark .tmblr-iframe {
-    filter: var(--controls);
+.controls {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--clr-text);
+    color: var(--clr-background);
+    border: 1px solid var(--clr-borders);
+    border-radius: 0.4rem;
+    padding: 0.4rem;
+
+    transition: all 0.7s ease-in-out;
+}
+
+.controls:hover {
+    background: var(--clr-container);
+    color: var(--clr-accent);
 }
 
 body {
@@ -86,6 +117,10 @@ button {
     position: absolute !important;
     width: 1px !important;
     white-space: nowrap !important;
+}
+
+.italics {
+    font-style: italic;
 }
 
 .light-mode {
@@ -336,7 +371,7 @@ button[role="tab"] .text {
     background: var(--clr-borders);
 }
 
-.bio-text {
+div.text {
     margin-block: 0.5rem;
 }
 
@@ -347,7 +382,7 @@ button[role="tab"] .text {
     gap: 1rem;
 }
 
-.stat-item, .likes-dislikes > * {
+.stat-item {
     flex: 1 1 calc((var(--container-size) - var(--sidebar-size) - 1rem) / 2.5);
 }
 
@@ -521,7 +556,7 @@ button[role="tab"] .text {
 
 .likes-block {
     display: flex;
-    column-gap: 1rem;
+    column-gap: 10px;
     flex-wrap: wrap;
 }
 
@@ -574,10 +609,6 @@ button[role="tab"] .text {
     outline-offset: 4px;
 }
 
-.character-title p {
-    font-style: italic;
-}
-
 .character-links {
     margin-inline-start: auto;
     font-size: calc(var(--fs-body) + 0.15rem);
@@ -612,8 +643,8 @@ button[role="tab"] .text {
 }
 
 .ship-name::before {
-    content: '\eabe';
-    font-family: "tabler-icons";
+    content: '\ec7a';
+    font-family: "solar-icons-2";
     color: var(--clr-accent);
     float: left;
     margin-inline-end: 6px;
