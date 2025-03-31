@@ -381,7 +381,7 @@ main {
 
     &::before {
         content: '';
-        width: 3px;
+        width: 5px;
         height: 100%;
         background: var(--clr-gradient);
 
@@ -443,6 +443,41 @@ main {
         overflow: hidden;
         white-space: nowrap;
     }
+}
+
+.image-and-icon {
+    --image-size: 3rem;
+
+    position: relative;
+
+    figure {
+        width: var(--image-size);
+        aspect-ratio: 1;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--clr-borders);
+        padding: 0.3rem;
+        overflow: hidden;
+
+        &:not(:has(+ .tab-icon)) {
+            display: none;
+        }
+
+        & + .tab-icon {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            translate: 0.3rem 0.5rem;
+    
+            i {
+                font-size: var(--fs-body);
+            }
+        }
+    }
+}
+
+.tab-image {
+    width: var(--image-size);
+    aspect-ratio: 1;
 }
 
 .tab-icon {
@@ -534,7 +569,7 @@ main {
 }
 
 .content > * {
-    animation: fade-in 0.9s forwards!important;
+    animation: fade-in 1.2s forwards!important;
 }
 
 .project-content {
@@ -885,6 +920,18 @@ main {
 
 .minor-list {
     margin-inline-end: 2rem;
+
+    .minor-char:not(:last-child)::after {
+        content: '';
+        width: 6px;
+        aspect-ratio: 1;
+        border-radius: var(--radius-round);
+        background: var(--clr-accent-2-gradient);
+
+        display: inline-block;
+        vertical-align: middle;
+        margin-inline: 5px;
+    }
 }
 
 .ship-list {
