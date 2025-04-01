@@ -560,6 +560,20 @@ main {
         padding: 0.4rem;
         border: 1px solid var(--clr-borders);
         border-radius: var(--radius-sm);
+
+        transition: background 0.8s ease-in-out, color 0.8s ease-in-out;
+
+        &:hover {
+            color: var(--clr-background);
+        }
+
+        &:nth-child(odd):hover {
+            background: var(--clr-accent);
+        }
+
+        &:nth-child(even):hover {
+            background: var(--clr-accent-2);
+        }
     }
 }
 
@@ -1071,7 +1085,6 @@ main {
     .nav-container {
         position: fixed;
         top: 0;
-        left: 0;
         width: calc(var(--sidebar-size) - 60px);
 
         &::after {
