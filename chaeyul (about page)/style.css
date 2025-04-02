@@ -163,7 +163,7 @@ main {
 }
 
 .sidebar-top {
-    margin-inline: auto;
+    margin-inline: 0;
 }
 
 .image-and-title {
@@ -183,7 +183,7 @@ main {
     position: absolute;
     right: 0;
     bottom: 0;
-    translate: 9.5rem 1rem;
+    translate: -3rem 1rem;
     width: calc(var(--sidebar-size) - 5rem);
 
     h1 {
@@ -215,7 +215,7 @@ main {
     position: absolute;
     bottom: 0;
     right: 0;
-    translate: 10rem -1rem;
+    translate: -2.6rem -1rem;
 }
 
 .tablist-wrapper {
