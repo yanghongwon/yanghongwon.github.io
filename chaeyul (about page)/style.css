@@ -1131,7 +1131,7 @@ main {
   fill: var(--clr-text);
 }
 
-@media screen and (width >= 800px) {
+@media screen and (width >= 900px) {
     main {
         grid-template-areas: 'links content sidebar';
     }
