@@ -351,6 +351,24 @@ html[data-theme="dark"] iframe.tmblr-iframe {
 .likes-list {
     display: grid;
     gap: 5px;
+
+    &:not(.dislikes-list) h3 span::before, &.dislikes-list .likes-icon i {
+        --clr-gradient: var(--clr-accent-gradient);
+        --clr-gradient-2: var(--clr-accent-2-gradient);
+    }
+
+    &:not(.dislikes-list) .list-item::after {
+        background: var(--clr-accent-2);
+    }
+
+    &.dislikes-list .list-item::after {
+        background: var(--clr-accent-2-gradient);
+    }
+
+    &.dislikes-list h3 span::before, &:not(.dislikes-list) .likes-icon i {
+        --clr-gradient: var(--clr-accent);
+        --clr-gradient-2: var(--clr-accent-2);
+    }
 }
 
 .likes-list:not(.dislikes-list) {
@@ -362,15 +380,6 @@ html[data-theme="dark"] iframe.tmblr-iframe {
     align-items: center;
     gap: 6px;
     
-    &:not(.dislikes-title) h3 span::before {
-            --clr-gradient: var(--clr-accent-gradient);
-            --clr-gradient-2: var(--clr-accent-2-gradient);
-        }
-        
-        &.dislikes-title h3 span::before {
-            --clr-gradient: var(--clr-accent);
-            --clr-gradient-2: var(--clr-accent-2);
-        }
     
     h3 span {
         position: relative;
@@ -399,15 +408,8 @@ html[data-theme="dark"] iframe.tmblr-iframe {
     border: 1px solid var(--clr-borders);
     border-radius: var(--radius-sm);
 
-    &:not(.dislikes-icon) i {
-        background: linear-gradient(to bottom, var(--clr-accent), var(--clr-accent-2));
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-    }
-
-    &.dislikes-icon i {
-        background: linear-gradient(to bottom, var(--clr-accent-gradient), var(--clr-accent-2-gradient));
+    i {
+        background: linear-gradient(to bottom, var(--clr-gradient), var(--clr-gradient-2));
         background-clip: text;
         -webkit-background-clip: text;
         color: transparent;
@@ -415,28 +417,33 @@ html[data-theme="dark"] iframe.tmblr-iframe {
 }
 
 .before-wrapper {
-    .list-wrapper {
-        &:not(.second-wrapper):after {
-            content: '';
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(to right, var(--clr-accent), var(--clr-accent-2));
-    
-            display: block;
-            margin-block: 2rem;
-            margin-inline: auto;
-        }
-    
-        &.second-wrapper:after {
-            content: '';
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(to right, var(--clr-accent-gradient), var(--clr-accent-2-gradient));
-    
-            display: block;
-            margin-block: 2rem;
-            margin-inline: auto;
-        }
+    &::after {
+        content: '';
+        width: 50%;
+        height: 3px;
+        background: linear-gradient(to right, var(--clr-gradient), var(--clr-gradient-2));
+
+        display: block;
+        margin-block: 2rem;
+        margin-inline: auto;
+    }
+
+    &:not(.second-wrapper):after {
+        --clr-gradient: var(--clr-accent);
+        --clr-gradient-2: var(--clr-accent-2);
+    }
+
+    &.second-wrapper:after {
+        --clr-gradient: var(--clr-accent-gradient);
+        --clr-gradient-2: var(--clr-accent-2-gradient);
+    }
+
+    &:not(.second-wrapper) .list-item::after {
+        background: var(--clr-accent);
+    }
+
+    &.second-wrapper .list-item::after {
+        background: var(--clr-accent-gradient);
     }
 }
 
@@ -446,38 +453,16 @@ html[data-theme="dark"] iframe.tmblr-iframe {
 
 .list-item {
     display: inline;
-}
 
-.list:not(.second) {
-    .list-item {
-    
-        &:not(:last-child)::after {
-            content: '';
-            width: 6px;
-            aspect-ratio: 1;
-            border-radius: var(--radius-round);
-            background: var(--clr-accent);
-    
-            display: inline-block;
-            vertical-align: middle;
-            margin-inline: 5px;
-        }
-    }
-}
-
-.list.second {
-    .list-item {
-        &:not(:last-child)::after {
-            content: '';
-            width: 6px;
-            aspect-ratio: 1;
-            border-radius: var(--radius-round);
-            background: var(--clr-accent-2);
-    
-            display: inline-block;
-            vertical-align: middle;
-            margin-inline: 5px;
-        }
+    &:not(:last-child)::after {
+        content: '';
+        width: 5px;
+        aspect-ratio: 1;
+        border-radius: var(--radius-sm);
+        
+        display: inline-block;
+        vertical-align: middle;
+        margin-inline: 5px;
     }
 }
 
@@ -523,7 +508,7 @@ html[data-theme="dark"] iframe.tmblr-iframe {
     gap: 10px;
 
     h3 {
-        display: inline-block;
+        display: block;
         position: relative;
 
         &::before {
@@ -648,7 +633,7 @@ html[data-theme="dark"] iframe.tmblr-iframe {
         --clr-gradient: var(--clr-links);
         --clr-gradient-2: var(--clr-links);
 
-        background: linear-gradient(to bottom, var(--clr-gradient), var(--clr-gradient-2));
+        background: linear-gradient(to right, var(--clr-gradient), var(--clr-gradient-2));
         background-clip: text;
         -webkit-background-clip: text;
         color: transparent;
@@ -658,45 +643,21 @@ html[data-theme="dark"] iframe.tmblr-iframe {
     &:nth-child(odd):hover a {
         --clr-gradient: var(--clr-accent);
         --clr-gradient-2: var(--clr-accent-2);
-
-        background: linear-gradient(to bottom, var(--clr-gradient), var(--clr-gradient-2));
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        transition: --clr-gradient 0.8s ease-in-out, --clr-gradient-2 0.8s ease-in-out;
     }
 
     &:nth-child(even):hover a {
         --clr-gradient: var(--clr-accent-gradient);
         --clr-gradient-2: var(--clr-accent-2-gradient);
-
-        background: linear-gradient(to bottom, var(--clr-gradient), var(--clr-gradient-2));
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        transition: --clr-gradient 0.8s ease-in-out, --clr-gradient-2 0.8s ease-in-out;
     }
 
     &:nth-child(even):hover .link-icon i, &:nth-child(odd) .link-icon i {
         --clr-gradient: var(--clr-accent);
         --clr-gradient-2: var(--clr-accent-2);
-
-        background: linear-gradient(to bottom, var(--clr-gradient), var(--clr-gradient-2));
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        transition: --clr-gradient 0.8s ease-in-out, --clr-gradient-2 0.8s ease-in-out;
     }
 
     &:nth-child(odd):hover .link-icon i, &:nth-child(even) .link-icon i {
         --clr-gradient: var(--clr-accent-gradient);
         --clr-gradient-2: var(--clr-accent-2-gradient);
-
-        background: linear-gradient(to bottom, var(--clr-gradient), var(--clr-gradient-2));
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        transition: --clr-gradient 0.8s ease-in-out, --clr-gradient-2 0.8s ease-in-out;
     }
 }
 
@@ -709,6 +670,14 @@ html[data-theme="dark"] iframe.tmblr-iframe {
     padding: 0.4rem;
     border: 1px solid var(--clr-borders);
     border-radius: var(--radius-sm);
+
+    i {
+        background: linear-gradient(to bottom, var(--clr-gradient), var(--clr-gradient-2));
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        transition: --clr-gradient 0.8s ease-in-out, --clr-gradient-2 0.8s ease-in-out;
+    }
 }
 
 .scroll-and-credit {
