@@ -515,20 +515,50 @@ main {
     }
 }
 
+.ld-item {
+    &:not(.dislikes-item) h3 span::before, &.dislikes-item .likes-icon i {
+        --clr-gradient: var(--clr-accent);
+        --clr-gradient-2: var(--clr-accent-gradient);
+    } 
+
+    &.dislikes-item h3 span::before, &:not(.dislikes-item) .likes-icon i {
+        --clr-gradient: var(--clr-accent-2);
+        --clr-gradient-2: var(--clr-accent-2-gradient);
+    } 
+
+    &:not(.dislikes-item) .like-item::after {
+        --clr-likes: var(--clr-accent-gradient);
+    }
+
+    &.dislikes-item .like-item::after {
+        --clr-likes: var(--clr-accent-2-gradient);
+    }
+}
+
+.interact-item {
+    &:not(.before-item) h3 span::before, &.before-item i{
+        --clr-gradient: var(--clr-accent);
+        --clr-gradient-2: var(--clr-accent-2-gradient);
+    }
+
+    &.before-item h3 span::before, &:not(before-item) i  {
+        --clr-gradient: var(--clr-accent-2);
+        --clr-gradient-2: var(--clr-accent-gradient);
+    }
+
+    &:not(.before-item) li::after {
+        --clr-interact: var(--clr-accent-2);
+    }
+
+    &.before-item li::after {
+        --clr-interact: var(--clr-accent-gradient);
+    }
+}
+
 .interact-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    &:not(.before-title) h3 span::before {
-        --clr-gradient: var(--clr-accent-2);
-        --clr-gradient-2: var(--clr-accent-2-gradient);
-    }
-
-    &.before-title h3 span::before {
-        --clr-gradient: var(--clr-accent);
-        --clr-gradient-2: var(--clr-accent-gradient);
-    }
 
     .interact-icon {
         display: flex;
@@ -546,16 +576,6 @@ main {
             -webkit-background-clip: text;
             color: transparent;
         }
-    }
-
-    &:not(.before-title) .interact-icon i {
-        --clr-gradient: var(--clr-accent);
-        --clr-gradient-2: var(--clr-accent-2)
-    }
-
-    &.before-title .interact-icon i {
-        --clr-gradient: var(--clr-accent-gradient);
-        --clr-gradient-2: var(--clr-accent-2-gradient);
     }
 
     h3 {
@@ -594,16 +614,6 @@ main {
     align-items: center;
     justify-content: space-between;
 
-    &:not(.dislikes-title) h3 span::before {
-        --clr-gradient: var(--clr-accent);
-        --clr-gradient-2: var(--clr-accent-2-gradient);
-    }
-
-    &.dislikes-title h3 span::before {
-        --clr-gradient: var(--clr-accent-2);
-        --clr-gradient-2: var(--clr-accent-gradient);
-    }
-
     .likes-icon {
         display: flex;
         align-items: center;
@@ -620,16 +630,6 @@ main {
             -webkit-background-clip: text;
             color: transparent;
         }
-    }
-
-    &:not(.dislikes-title) .likes-icon i {
-        --clr-gradient: var(--clr-accent-gradient);
-        --clr-gradient-2: var(--clr-accent-2)
-    }
-
-    &.dislikes-title .likes-icon i {
-        --clr-gradient: var(--clr-accent-2-gradient);
-        --clr-gradient-2: var(--clr-accent)
     }
 
     h3 {
@@ -675,29 +675,13 @@ main {
     .likes-list li::after {
         background: var(--clr-likes);
     }
-
-    &:not(.dislikes-text) .likes-list li::after {
-        --clr-likes: var(--clr-accent-gradient);
-    }
-
-    &.dislikes-text .likes-list li::after {
-        --clr-likes: var(--clr-accent-2-gradient);
-    }
 }
 
 .interact-text {
     margin-inline-end: 2rem;
 
-    .before-list li::after {
+    & li::after {
         background: var(--clr-interact);
-    }
-
-    &:not(.before-text) .before-list li::after {
-        --clr-interact: var(--clr-accent);
-    }
-
-    &.before-text .before-list li::after {
-        --clr-interact: var(--clr-accent-2);
     }
 }
 
@@ -739,13 +723,13 @@ main {
         color: var(--clr-text);
     }
 
-    &:nth-child(odd) a h3::before, &:nth-child(even) a:hover h3::before {
+    &:nth-child(odd) a::before, &:nth-child(even) a:hover::before {
         --clr-gradient: var(--clr-accent);
         --clr-gradient-2: var(--clr-accent-2);
         transition: --clr-gradient 0.8s ease-in-out, --clr-gradient-2 0.8s ease-in-out;
     }
 
-    &:nth-child(even) a h3::before, &:nth-child(odd) a:hover h3::before {
+    &:nth-child(even) a::before, &:nth-child(odd) a:hover::before {
         --clr-gradient: var(--clr-accent-gradient);
         --clr-gradient-2: var(--clr-accent-2-gradient);
         transition: --clr-gradient 0.8s ease-in-out, --clr-gradient-2 0.8s ease-in-out;
@@ -755,7 +739,7 @@ main {
         position: absolute;
         bottom: 0;
         right: 0;
-        translate: -5rem 0.5rem;
+        translate: -5rem 1rem;
 
         background: var(--clr-container);
         padding: 0.7rem;
@@ -763,12 +747,14 @@ main {
 
         width: 11ch;
 
-        & a h3 {
+        & a {
+            display: block;
             max-width: 100%;
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
-            font-size: var(--fs-body);
+            font-family: var(--ff-accent);
+            font-weight: 700;
 
             position: relative;
 
