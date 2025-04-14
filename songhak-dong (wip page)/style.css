@@ -371,9 +371,8 @@ main {
 
 .tabs {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     align-items: start;
-    column-gap: 1rem;
 }
 
 .tabs button {
@@ -432,14 +431,16 @@ main {
     margin-left: 25px;
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 10px;
-    max-width: 30ch;
+    max-width: calc((var(--container-size) / 2) - 1rem);
 
     h3 {
         display: block;
         padding-bottom: 0.3rem;
+        text-align: start;
 
+        width: 100%;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
