@@ -53,6 +53,12 @@ a {
     }
 }
 
+s {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--clr-accent);
+}
+
 h1, h2, h3, p, ul:is([class], [id]), ol:is([class], [id]) {
     margin: 0;
     padding: 0;
