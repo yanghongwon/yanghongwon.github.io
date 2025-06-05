@@ -254,23 +254,23 @@ iframe.tmblr-iframe {
     max-width: var(--container-size);
     width: 100%;
 
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 2rem;
-
-    &::after {
-        content: '';
-        height: 6rem;
-        background: var(--clr-borders);
-        flex: 0 0 1px;
-    }
-
     @media screen and (width >= 900px) {
         position: sticky;
         top: 2rem;
 
         width: var(--sidebar-size);
+
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        gap: 2rem;
+
+        &::after {
+            content: '';
+            height: 6rem;
+            background: var(--clr-borders);
+            flex: 0 0 1px;
+        }
     }
 }
 
@@ -447,22 +447,22 @@ iframe.tmblr-iframe {
     max-width: var(--container-size);
     width: 100%;
 
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 2rem;
-
-    &::before {
-        content: '';
-        height: 6rem;
-        background: var(--clr-borders);
-        flex: 0 0 1px;
-    }
-
     @media screen and (width >= 900px) {
         position: sticky;
         top: 2rem;
         width: var(--sidebar-size);
+
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 2rem;
+
+        &::before {
+            content: '';
+            height: 6rem;
+            background: var(--clr-borders);
+            flex: 0 0 1px;
+        }
     }
 }
 
