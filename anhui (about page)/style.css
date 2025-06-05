@@ -294,8 +294,8 @@ iframe.tmblr-iframe {
 }
 
 .header-image {
-    --clr-gradient: var(--clr-accent-gradient);
-    --clr-gradient-2: var(--clr-accent-2-gradient);
+    --clr-gradient: var(--clr-borders);
+    --clr-gradient-2: var(--clr-borders);
 
     width: 5rem;
     aspect-ratio: 1;
@@ -308,6 +308,7 @@ iframe.tmblr-iframe {
     &:hover {
         --clr-gradient: var(--clr-accent);
         --clr-gradient-2: var(--clr-accent-2);
+        transition: var(--gradient-transition-timing);
     }
 }
 
@@ -341,6 +342,8 @@ iframe.tmblr-iframe {
         background: var(--clr-container);
         border: 1px solid var(--clr-borders);
         padding: 1rem;
+
+        font-style: italic;
     }
 }
 
