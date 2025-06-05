@@ -1,11 +1,3 @@
-:root {
-    --transition-timing: 0.8s ease-in-out;
-    --gradient-transition-timing: --clr-gradient var(--transition-timing). --clr-gradient-2 var(--transition-timing);
-
-    --radius-sm: 0.4rem;
-    --radius-round: 50%;
-}
-
 @property --clr-gradient {
     syntax: '<color>';
     initial-value: transparent;
