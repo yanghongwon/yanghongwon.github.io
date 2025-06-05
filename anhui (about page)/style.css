@@ -1,16 +1,4 @@
 :root {
-    --ff-body: 'Plus Jakarta Sans', sans-serif;
-    --ff-accent: 'Roboto Mono', monospace;
-
-    --fs-body: 0.9rem;
-    --fs-h3: calc(var(--fs-body) + 0.2rem);
-    --fs-h2: calc(var(--fs-body) + 0.4rem);
-    --fs-h1: calc(var(--fs-body) + 0.6rem);
-
-    --container-size: 450px;
-    --sidebar-size: 270px;
-    --gradient-line-height: 0.4rem;
-
     --transition-timing: 0.8s ease-in-out;
     --gradient-transition-timing: --clr-gradient var(--transition-timing). --clr-gradient-2 var(--transition-timing);
 
