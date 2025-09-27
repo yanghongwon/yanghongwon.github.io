@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>burn: all-in-one theme</title>
+    <link rel="shortcut icon" href="{Favicon}"/>
+
+    <!-- google fonts script by @glenthemes -->
+    <script src="https://cdn.jsdelivr.net/gh/ht-devx/addGoogleFonts/v2/addGoogleFonts.min.js"></script>
+
+    <script>
+    addGoogleFonts("Montserrat, Oxygen Mono");
+    </script>
+
+    <!-- solar icons -->
+    <link href="https://solar-icons.gitlab.io/i/icons.css" rel="stylesheet" crossorigin>
+
+    <!-- jquery for tooltips by atomiks -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+    <!-- light/dark script by @mournstera -->
+    <script>
+        const storedTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
+        if (storedTheme) {
+            document.documentElement.setAttribute("data-theme", storedTheme);
+        }
+    </script>
+
+    <style type="text/css">
+        :root {
+    --ff-body: 'Montserrat', sans-serif;
+    --ff-accent: 'Oxygen Mono', monospace;
+
+    --fs-body: 0.9rem;
+    --fs-h3: calc(var(--fs-body) + 0.2rem);
+    --fs-h2: calc(var(--fs-body) + 0.4rem);
+    --fs-h1: calc(var(--fs-body) + 0.6rem);
+
+    --container-size: 500px;
+    --sidebar-size: 270px;
+    --tab-sidebar-size: 2rem;
+    --header-image-height: 200px;
+
+    --transition-timing: 0.8s ease-in-out;
+    --gradient-transition-timing: --clr-gradient var(--transition-timing), --clr-gradient-2 var(--transition-timing);
+
+    --radius-sm: 0.4rem;
+    --radius-round: 50%;
+
+    --light-mode-filter: invert(100%);
+    --dark-mode-filter: invert(0);
+}
+
+:root, html[data-theme="light"] {
+    --light-mode: none;
+    --dark-mode: flex;
+
+    --light-image: flex;
+    --dark-image: none;
+
+    --clr-background: #f0f0f0;
+    --clr-container: #fff;
+    --clr-text: #000;
+    --clr-links: #202020;
+    --clr-borders: #d3d3d3;
+    --clr-accent: #6a3c87;
+    --clr-accent-2: #7074b7;
+    --clr-accent-gradient: #4E76B7;
+    --clr-accent-2-gradient: #6B6696;
+    --clr-misc-accent: #B371C0;
+    --clr-misc-accent-2: #79428E;
+}
+
+html[data-theme="dark"] {
+    --light-mode: flex;
+    --dark-mode: none;
+
+    --light-image: none;
+    --dark-image: flex;
+
+    --clr-background: #202020;
+    --clr-container: #101010;
+    --clr-text: #fff;
+    --clr-links: #eee;
+    --clr-borders: #505050;
+    --clr-accent: #f6dfa7;
+    --clr-accent-2: #efacc8;
+    --clr-accent-gradient:  #f3c0db;
+    --clr-accent-2-gradient: #a1a9d7;
+    --clr-misc-accent: #c7dcb9;
+    --clr-misc-accent-2: #99a5c6;
+}
+
+@property --clr-gradient {
+    syntax: '<color>';
+    initial-value: transparent;
+    inherits: false;
+}
+
+@property --clr-gradient-2 {
+    syntax: '<color>';
+    initial-value: transparent;
+    inherits: false;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *:before,
+html.theme-transition *:after {
+  transition: 0s !important;
+  transition-delay: 0 !important;
+}
+
+html {
+    scroll-behavior: smooth;
+    font: inherit;
+}
+
+body {
+    background: var(--clr-background);
+    color: var(--clr-text);
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
+
+    display: grid;
+    grid-template-columns: 1rem [content-start] 1fr [content-end] 1rem;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+a {
+    color: var(--clr-links);
+    text-decoration: none;
+    transition: color var(--transition-timing);
+
+    &:hover {
+        color: var(--clr-accent);
+    }
+}
+
+h1, h2, h3, p, ul:is([class], [id]), ol:is([class], [id]) {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    font-family: var(--ff-accent);
+    font-weight: 600;
+    font-size: var(--fs-heading);
+    line-height: 1.2;
+}
+
+h1 {
+    --fs-heading: var(--fs-h1);
+}
+
+h2 {
+    --fs-heading: var(--fs-h2);
+}
+
+h3 {
+    --fs-heading: var(--fs-h3);
+}
+
+p:is(:not(:last-of-type, :only-of-type)) {
+    margin-block-end: 0.6rem;
+}
+
+ul:is([class], [id]), ol:is([class], [id]) {
+    list-style: none;
+}
+
+.solar-icons {
+    font-size: var(--fs-h3);
+}
+
+button {
+    background: inherit;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+s, del {
+    text-decoration: 2px line-through var(--clr-accent-gradient);
+    opacity: 0.7;
+}
+
+/* utility classes */
+
+.fixed {
+    position: fixed;
+}
+
+.top-left {
+    top: 1rem;
+    left: 1rem;
+}
+
+.top-right {
+    top: 1rem;
+    right: 1rem;
+}
+
+.bottom-left {
+    bottom: 1rem;
+    left: 1rem;
+}
+
+.bottom-right {
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--clr-icon-bg, var(--clr-container));
+    background-repeat: no-repeat;
+    color: var(--clr-icon, inherit);
+    padding: 0.4rem;
+    border: 1px solid var(--clr-icon-borders, var(--clr-borders));
+    border-radius: var(--icon-radius, var(--radius-sm));
+}
+
+.fit-cover {
+    object-fit: cover;
+}
+
+.grid-stack {
+    display: grid;
+    justify-items: start;
+    gap: var(--grid-gap, 10px);
+    z-index: 1;
+}
+
+.light-mode {
+    display: var(--light-mode);
+}
+
+.dark-mode {
+    display: var(--dark-mode);
+}
+
+.light-image {
+    display: var(--light-image);
+}
+
+.dark-image {
+    display: var(--dark-image);
+}
+
+.inner-text, .text-inner {
+    margin-block-start: var(--margin-block-start, 0);
+    margin-block-end: var(--margin-block-end, 0);
+}
+
+/* utility classes */
+
+/* full width image styles */
+.full-width-images, .full-width-image {
+    grid-column: 1 / -1;
+    grid-row: 1;
+
+    width: 100%;
+    max-height: var(--header-image-height);
+}
+/* full width image styles */
+
+/* main content styles */
+.content-wrapper {
+    grid-area: content;
+    grid-row: 1;
+
+    margin: 4rem auto;
+
+    display: grid;
+    grid-template-areas: 'tabs'
+    'panels';
+    justify-content: start;
+
+    @media screen and (width < 900px) {
+        translate: 0 calc(var(--header-image-height) - 9.5rem);
+        row-gap: 1rem;
+    }
+
+    @media screen and (width >= 900px) {
+        grid-template-areas: 'tabs panels';
+        align-content: start;
+        translate: 0 calc(var(--header-image-height) - 5rem);
+        column-gap: 3rem;
+    }
+}
+
+.tab-sidebar, .nav-sidebar {
+    max-width: var(--container-size);
+    width: 100%;
+}
+
+/* tab sidebar styles */
+.tab-sidebar {
+    grid-area: tabs;
+
+    @media screen and (width < 900px) {
+        translate: 0 4.5rem;
+    }
+
+    @media screen and (width >= 900px) {
+        width: var(--tab-sidebar-size);
+        max-height: 25rem;
+        height: 100%;
+
+        display: flex;
+        gap: 1.5rem;
+
+        &::after {
+            content: '';
+            width: 1px;
+            background: rgba(from var(--clr-text) r g b / 0.4);
+            flex-shrink: 0;
+        }
+    }
+
+    .grid-stack {
+        @media screen and (width < 900px) {
+            grid-auto-flow: column;
+        }
+    }
+}
+
+.tabs-and-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    @media screen and (width >= 900px) {
+        flex-direction: column;
+    }
+}
+
+.tab-list {
+    button {
+        position: relative;
+
+        &[aria-selected="true"]::after {
+            content: '';
+            width: 14px;
+            aspect-ratio: 1;
+            background: var(--clr-accent-2);
+            border-radius: var(--radius-round);
+
+            position: absolute;
+            top: 0;
+            right: 0;
+            translate: 0.2rem -0.2rem;
+        }
+
+        .tab-icon {
+            transition: color var(--transition-timing), background var(--transition-timing);
+        }
+
+        &[aria-selected="true"], &:hover {
+            .tab-icon {
+                --clr-icon-bg: var(--clr-text);
+                --clr-icon: var(--clr-background);
+            }
+        }
+    }
+}
+
+/* tab sidebar styles */
+
+/* panels styles */
+.panels-wrapper {
+    grid-area: panels;
+    line-height: 1.5;
+
+    &:has(:not(.posts-panel)) {
+        max-width: var(--container-size);
+        width: 100%;
+    }
+
+    @media screen and (width >= 900px) {
+        &:has(:not(.posts-panel)) {
+            width: var(--container-size);
+        }
+    }
+}
+
+.posts-panel {
+    display: grid;
+    grid-template-areas: 'header-and-posts'
+    'nav';
+    gap: 3rem;
+
+    @media screen and (width >= 960px) {
+        grid-template-areas: 'header-and-posts nav';
+    }
+}
+
+.header-and-posts {
+    grid-area: header-and-posts;
+    max-width: var(--container-size);
+    width: 100%;
+
+    @media screen and (width >= 900px) {
+        width: var(--container-size);
+    }
+}
+
+.main-header {
+    margin-block-end: 2rem;
+}
+
+.desc-and-links {
+    position: relative;
+}
+
+.header-description {
+    --margin-block-end: 1.6rem;
+
+    background: var(--clr-container);
+    border: 1px solid rgba(from var(--clr-text) r g b / 0.4);
+    padding: 0.7rem 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.header-links {
+    max-width: calc(100% - 2rem);
+    background: var(--clr-container);
+    padding: 0.7rem;
+    border: 1px solid rgba(from var(--clr-text) r g b / 0.4);
+    border-radius: calc(var(--radius-sm) + 0.2rem);
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    translate: -1rem 1rem;
+    z-index: 5;
+}
+
+.header-links-list {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    li {
+        display: flex;
+        gap: 10px;
+
+        &:not(:last-child)::after {
+            content: '';
+            width: 1px;
+            background: rgba(from var(--clr-text) r g b / 0.4);
+        }
+    }
+}
+
+.panels-group {
+    & > * {
+        animation: fade-in var(--transition-timing) forwards;
+    }
+}
+
+.about-wrapper {
+    --grid-gap: 1rem;
+}
+
+.about-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+
+    b {
+        background: var(--clr-container);
+        padding: 0.3rem 0.5rem;
+        border: 1px solid rgba(from var(--clr-text) r g b / 0.4);
+        border-radius: calc(var(--radius-sm) - 0.2rem);
+
+        font-family: var(--ff-accent);
+        font-size: calc(var(--fs-body) + 0.1rem);
+    }
+}
+
+.quick-stats-list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    li {
+        display: flex;
+        gap: 8px;
+
+        &:not(:last-child)::after {
+            content: '';
+            width: 2px;
+            background: rgba(from var(--clr-text) r g b / 0.4);
+        }
+    }
+}
+
+.pref-list {
+    --grid-gap: 1rem;
+}
+
+.pref-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.pref-text {
+    --grid-gap: 0;
+
+    display: flex;
+    gap: 10px;
+
+    &::before {
+        content: '';
+        width: 1px;
+        background: rgba(from var(--clr-text) r g b / 0.4);
+        flex-shrink: 0;
+    }
+
+    b {
+        font-family: var(--ff-accent);
+        font-size: calc(var(--fs-body) + 0.15rem);
+
+        background: linear-gradient(to right, var(--clr-misc-accent), var(--clr-misc-accent-2));
+        background-size: 100% 5px;
+        background-repeat: no-repeat;
+        background-position: bottom;
+    }
+}
+
+.text-list {
+    display: block;
+    line-height: 1.3;
+
+    li {
+        display: inline;
+
+        &:not(:last-child)::after {
+            content: '';
+            width: 6px;
+            aspect-ratio: 1;
+            background: var(--clr-misc-accent);
+            border-radius: var(--radius-round);
+
+            display: inline-block;
+            vertical-align: middle;
+            margin-inline: 2px;
+        }
+    }
+
+    p {
+        display: inline;
+    }
+}
+
+.updates-list {
+    --grid-gap: 1.7rem;
+}
+
+.update-item {
+    display: flex;
+    align-items: start;
+    gap: 10px;
+}
+
+.update-text {
+    --grid-gap: 2px;
+
+    display: flex;
+    gap: 10px;
+
+    &::before {
+        content: '';
+        width: 1px;
+        background: rgba(from var(--clr-text) r g b / 0.4);
+        flex-shrink: 0;
+    }
+
+    b {
+        font-family: var(--ff-accent);
+        font-size: calc(var(--fs-body) + 0.15rem);
+
+        background: linear-gradient(to right, var(--clr-accent), var(--clr-accent-2));
+        background-size: 100% 5px;
+        background-repeat: no-repeat;
+        background-position: bottom;
+    }
+}
+
+.progress-list {
+    --grid-gap: 1.5rem;
+}
+
+.progress-item {
+    width: 100%;
+
+    .progress-bar {
+        width: 100%;
+        height: 12px;
+        background: var(--clr-container);
+        border: 1px solid rgba(from var(--clr-text) r g b / 0.4);
+
+        position: relative;
+        border-radius: 1000vw;
+        overflow: hidden;
+
+        &::before {
+            content: '';
+            width: var(--progress-width);
+            height: 100%;
+            background: var(--clr-accent);
+
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+        }
+    }
+}
+
+.progress-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    margin-block-end: 0.5rem;
+
+    b {
+        font-family: var(--ff-accent);
+        font-size: calc(var(--fs-body) + 0.1rem);
+        max-width: 50ch;
+        
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
+        &:has(+ .progress-text) {
+            max-width: 33ch;
+        }
+    }
+}
+
+.progress-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-style: italic;
+
+        &:not(:last-child)::after {
+            content: '/';
+            opacity: 0.5;
+        }
+    }
+}
+/* header and panels styles */
+
+/* nav sidebar styles */
+.nav-sidebar {
+    grid-area: nav;
+    line-height: 1.5;
+
+    @media screen and (width >= 960px) {
+        width: var(--sidebar-size);
+    }
+}
+
+.image-and-title, .image-and-links-btn {
+    position: relative;
+}
+
+.sidebar-icon {
+    width: 4.7rem;
+    aspect-ratio: 1;
+    background: linear-gradient(to bottom, var(--clr-container)) padding-box, linear-gradient(to bottom, rgba(from var(--clr-text) r g b / 0.4), rgba(from var(--clr-text) r g b / 0.2)) border-box;
+    padding: 0.35rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-round) var(--radius-round) 0 var(--radius-round);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    translate: -2rem -2rem;
+}
+
+.links-icons-container {
+    position: absolute;
+
+    display: grid;
+    place-items: center;
+
+    opacity: 0;
+    transition: opacity var(--transition-timing);
+}
+
+.image-and-links-btn:hover .links-icons-container {
+    opacity: 1;
+}
+
+.close-links, [aria-expanded="true"] .open-links {
+    display: none;
+}
+
+.open-links, [aria-expanded="true"] .close-links {
+    display: flex;
+}
+
+.sidebar-title {
+    --margin-block-start: 0;
+
+    background: var(--clr-container);
+    padding: 0.7rem 1rem;
+    border: 1px solid rgba(from var(--clr-text) r g b / 0.4);
+    border-radius: var(--radius-sm) var(--radius-sm) var(--radius-sm) 0;
+
+    h1 {
+        font-family: var(--ff-accent);
+        font-size: calc(var(--fs-body) + 0.1rem);
+        font-weight: 600;
+    }
+
+    .text-inner {
+        margin-inline-start: 2rem;
+    }
+}
+
+.extra-links-list {
+    display: grid;
+    transition: grid-template-rows var(--transition-timing);
+
+    translate: 0 0.7rem;
+
+    &[data-state="opened"] {
+        grid-template-rows: 1fr;
+    }
+
+    &[data-state="closed"] {
+        grid-template-rows: 0fr;
+    }
+
+    & > li {
+        grid-row: span 2 / 1;
+    }
+
+    div {
+        --grid-stack: 1rem;
+        overflow: hidden;
+
+        li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .extra-icon {
+                transition: background var(--transition-timing), color var(--transition-timing);
+            }
+
+            &:hover .extra-icon {
+                --clr-icon-bg: var(--clr-accent);
+                --clr-icon: var(--clr-background);
+            }
+
+            a {
+                --background-x-size: 0%;
+
+                color: var(--clr-text);
+
+                background: linear-gradient(to right, var(--clr-accent-gradient), var(--clr-accent-2-gradient));
+                background-repeat: no-repeat;
+                background-size: var(--background-x-size) 4px;
+                background-position: bottom right;
+                transition: background-size var(--transition-timing), color var(--transition-timing);
+
+                &:hover {
+                    --background-x-size: 100%;
+
+                    background-position: bottom left;
+                }
+            }
+        }
+    }
+}
+/* nav sidebar styles */
+
+/* main content styles */
+
+/* top and bottom corner styles */
+.controls {
+    --clr-icon-bg: var(--clr-text);
+    --clr-icon: var(--clr-background);
+}
+
+iframe.tmblr-iframe {
+    transform: scale(0.75, 0.75);
+    translate: -1.4rem 0.3rem;
+    filter: var(--light-mode-filter);
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-timing), visibility var(--transition-timing);
+
+    html[data-theme="dark"] & {
+        filter: var(--dark-mode-filter);
+    }
+}
+
+.show-iframe iframe.tmblr-iframe {
+    opacity: 1;
+    visibility: visible;
+}
+
+.toggle {
+    --clr-icon-bg: linear-gradient(to bottom, var(--clr-accent), var(--clr-accent-2));
+    --clr-icon: var(--clr-background);
+}
+
+.scroll-and-credit {
+  --clr-icon-bg: var(--clr-text);
+  --clr-icon: var(--clr-background);
+}
+
+.scroll-to-top {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-timing), visibility var(--transition-timing), background var(--transition-timing), color var(--transition-timing);
+
+  &:hover {
+    --clr-icon-bg: var(--clr-container);
+    --clr-icon: var(--clr-accent);
+  }
+}
+
+.show-scroll .scroll-to-top {
+  opacity: 1;
+  visibility: visible;
+}
+
+.credit {
+  transition: background var(--transition-timing), color var(--transition-timing);
+
+  &:hover {
+    background: var(--clr-container);
+    color: var(--clr-accent);
+  }
+}
+/* top and bottom corner styles */
+
+.tippy-tooltip.custom-theme {
+  background-color: var(--clr-text);
+  color: var(--clr-background);
+  font-size: inherit;
+  font-weight: 600;
+  font-family: var(--ff-accent);
+  letter-spacing: 0.5px;
+  margin-block: 0.5rem;
+  text-align: center;
+}
+
+.tippy-tooltip.custom-theme .tippy-svg-arrow {
+  fill: var(--clr-text);
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <div class="controls-and-toggle | fixed top-right grid-stack">
+        <button class="controls | icon">
+            <i class="solar-icons" stroke="2" icon-name="sliders-horizontal"></i>
+        </button>
+
+        <button class="toggle | icon">
+            <span class="light-mode">
+                <i class="solar-icons" stroke="2" icon-name="sun-2"></i>
+            </span>
+
+            <span class="dark-mode">
+                <i class="solar-icons" stroke="2" icon-name="moon-sleep"></i>
+            </span>
+        </button>
+    </div>
+
+    <div class="full-width-images">
+        <span class="light-image">
+            <img src="https://plus.unsplash.com/premium_photo-1661878091370-4ccb8763756a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzN8fGphcGFuZXNlJTIwd2FsbHBhcGVyfGVufDB8fDB8fHww" class="full-width-image | fit-cover" alt=""/>
+        </span>
+
+        <span class="dark-image">
+            <img src="https://images.unsplash.com/photo-1522177743530-6dcab6baa5f5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzl8fGphcGFuZXNlJTIwd2FsbHBhcGVyfGVufDB8fDB8fHww" class="full-width-image | fit-cover" alt=""/>
+        </span>
+    </div>
+
+    <main class="content-wrapper">
+        <aside class="tab-sidebar">
+            <div class="tabs-and-links">
+                <div class="tab-group">
+                    <ul class="tab-list | grid-stack" role="tablist">
+                        <li class="tab-item">
+                            <button id="tab-1" aria-controls="posts" aria-selected="true" role="tab" tabindex="0" title="posts">
+                                <span class="tab-icon | icon">
+                                    <i class="solar-icons" stroke="2" icon-name="list-dsc"></i>
+                                </span>
+                            </button>
+                        </li>
+                        
+                        <li class="tab-item">
+                            <button id="tab-2" aria-controls="about" aria-selected="false" role="tab" tabindex="-1" title="about the user">
+                                <span class="tab-icon | icon">
+                                    <i class="solar-icons" stroke="2" icon-name="info-circle"></i>
+                                </span>
+                            </button>
+                        </li>
+
+                        <li class="tab-item">
+                            <button id="tab-3" aria-controls="misc" aria-selected="false" role="tab" tabindex="-1" title="updates">
+                                <span class="tab-icon | icon">
+                                    <i class="solar-icons" stroke="2" icon-name="bell-1"></i>
+                                </span>
+                            </button> 
+                        </li>
+
+
+                        <li class="tab-item">
+                            <button id="tab-4" aria-controls="progress" aria-selected="false" role="tab" tabindex="-1" title="progress">
+                                <span class="tab-icon | icon">
+                                    <i class="solar-icons" stroke="2" icon-name="loading"></i>
+                                </span>
+                            </button> 
+                        </li>
+                    </ul>
+                </div>
+
+                <nav class="standard-links">
+                    <ul class="standard-links-list | grid-stack">
+                        <li class="standard-item">
+                            <a href="/" class="standard-icon | icon" title="homepage">
+                                <i class="solar-icons" stroke="2" icon-name="home-2"></i>
+                            </a>
+                        </li>
+
+                        <li class="standard-item">
+                            <a href="/ask" class="standard-icon | icon" title="askbox">
+                                <i class="solar-icons" stroke="2" icon-name="inbox-2"></i>
+                            </a>
+                        </li>
+
+                        <li class="standard-item">
+                            <a href="/archive" class="standard-icon | icon" title="archive">
+                                <i class="solar-icons" stroke="2" icon-name="history-2"></i>
+                            </a>
+                        </li>
+
+                        <li class="standard-item">
+                            <a href="/" class="standard-icon | icon" title="extra standard link 1">
+                                <i class="solar-icons" stroke="2" icon-name="link-1"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <div class="panels-wrapper">
+            <div class="panels-group">
+                <div id="posts" aria-labelledby="tab-1" role="tabpanel" tabindex="0">
+                    
+                    <div class="posts-panel">
+                        <div class="header-and-posts">
+                            <header class="main-header">
+                                <div class="desc-and-links">
+                                    <div class="header-description">
+                                        <div class="text-inner">
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas adipisci animi accusamus facilis impedit fugiat!</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="header-links">
+                                        <ul class="header-links-list">
+                                            <li class="header-link">
+                                                <a href="/" class="header-icon" title="custom link 1">
+                                                    <i class="solar-icons" stroke="2" icon-name="user-1"></i>
+                                                </a>
+                                            </li>
+
+                                            <li class="header-link">
+                                                <a href="/" class="header-icon" title="custom link 2">
+                                                    <i class="solar-icons" stroke="2" icon-name="bed-2"></i>
+                                                </a>
+                                            </li>
+
+                                            <li class="header-link">
+                                                <a href="/" class="header-icon" title="custom link 3">
+                                                    <i class="solar-icons" stroke="2" icon-name="star-sparkle-2"></i>
+                                                </a>
+                                            </li>
+
+                                            <li class="header-link">
+                                                <a href="/" class="header-icon" title="custom link 4">
+                                                    <i class="solar-icons" stroke="2" icon-name="star-orbit-2"></i>
+                                                </a>
+                                            </li>
+
+                                            <li class="header-link">
+                                                <a href="/" class="header-icon" title="custom link 5">
+                                                    <i class="solar-icons" stroke="2" icon-name="ghost-2"></i>
+                                                </a>
+                                            </li>
+
+                                            <li class="header-link">
+                                                <a href="/" class="header-icon" title="custom link 6">
+                                                    <i class="solar-icons" stroke="2" icon-name="at-sign-circle"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </header>
+
+                            <div class="posts-wrapper">
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et, delectus quidem. Corrupti suscipit explicabo repellat molestias voluptatem, veniam eius natus!</p>
+                            </div>
+                        </div>
+
+                        <aside class="nav-sidebar">
+                            <div class="image-and-title">
+                                <button class="image-and-links-btn" aria-controls="extra-links-list" aria-expanded="false">
+                                    <div class="sidebar-icons">
+                                        <span class="light-image">
+                                            <img src="https://i.postimg.cc/jSqGyz16/sosolllv-Photo-by-on-September-23-2025-May-be-an-image-of-1-per-1.jpg" class="sidebar-icon | fit-cover" alt=""/>
+                                        </span>
+
+                                        <span class="dark-image">
+                                            <img src="https://i.postimg.cc/DZGRttzF/fila-korea-Photo-by-on-August-31-2025-May-be-an-image-of-1-pers-4.jpg" class="sidebar-icon | fit-cover" alt=""/>
+                                        </span>
+                                    </div>
+
+                                    <div class="links-icons-container">
+                                        <span class="open-links" title="open extra links">
+                                            <i class="solar-icons" stroke="2" icon-name="menu-lines-3"></i>
+                                        </span>
+
+                                        <span class="close-links" title="close extra links">
+                                            <i class="solar-icons" stroke="2" icon-name="close"></i>
+                                        </span>
+                                    </div>
+                                </button>
+
+                                <div class="sidebar-title">
+                                    <div class="text-inner">
+                                        <h1>Lorem ipsum dolor sit amet.</h1>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ul id="extra-links-list" class="extra-links-list" data-state="closed">
+                                <div class="text-inner | grid-stack">
+                                    <li class="extra-item">
+                                        <span class="extra-icon | icon">
+                                            <i class="solar-icons" stroke="2" icon-name="bookmark"></i>
+                                        </span>
+
+                                        <a href="/">extra link 1</a>
+                                    </li>
+
+                                    <li class="extra-item">
+                                        <span class="extra-icon | icon">
+                                            <i class="solar-icons" stroke="2" icon-name="book-open-2"></i>
+                                        </span>
+
+                                        <a href="/">extra link 2</a>
+                                    </li>
+
+                                    <li class="extra-item">
+                                        <span class="extra-icon | icon">
+                                            <i class="solar-icons" stroke="2" icon-name="tv"></i>
+                                        </span>
+
+                                        <a href="/">extra link 3</a>
+                                    </li>
+
+                                    <li class="extra-item">
+                                        <span class="extra-icon | icon">
+                                            <i class="solar-icons" stroke="2" icon-name="face-smile"></i>
+                                        </span>
+
+                                        <a href="/">extra link 4</a>
+                                    </li>
+
+                                </div>
+                            </ul>
+
+                        </aside>
+                    </div>
+
+
+                </div>
+
+                <div id="about" aria-labelledby="tab-2" role="tabpanel" tabindex="-1" hidden>
+
+                    <div class="about-wrapper | grid-stack">
+                        <div class="about-top">
+                            <b>
+                                @pouthongwon
+                            </b>
+
+                            <div class="quick-stats">
+                                <ul class="quick-stats-list">
+                                    <li class="quick-stat">
+                                        <p>she/it/heo/hye</p>
+                                    </li>
+
+                                    <li class="quick-stat">
+                                        <p>aries</p>
+                                    </li>
+
+                                    <li class="quick-stat">
+                                        <p>semi-hiatus</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="about-desc">
+                            <div class="about-desc-text">
+                                <div class="text-inner">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, eius quisquam? Est, esse repellendus maiores eius, excepturi delectus repellat pariatur mollitia porro deleniti consequatur vero minus molestiae nihil aliquam aliquid.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="about-pref">
+                            <ul class="pref-list | grid-stack">
+                                <li class="pref-item">
+                                    <span class="pref-icon | icon">
+                                        <i class="solar-icons" stroke="2" icon-name="face-smile"></i>
+                                    </span>
+
+                                    <div class="pref-text">
+                                        <div class="pref-text-inner | grid-stack">
+                                            <b>likes</b>
+
+                                            <ul class="text-list">
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+
+
+
+                                <li class="pref-item">
+                                    <span class="pref-icon | icon">
+                                        <i class="solar-icons" stroke="2" icon-name="face-smile"></i>
+                                    </span>
+
+                                    <div class="pref-text">
+                                        <div class="pref-text-inner | grid-stack">
+                                            <b>likes</b>
+
+                                            <ul class="text-list">
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+
+                                                <li class="text-item">
+                                                    <p>like 1</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="misc" aria-labelledby="tab-3" role="tabpanel" tabindex="-1" hidden>
+                    <div class="updates-wrapper">
+                        <ul class="updates-list | grid-stack">
+                            <li class="update-item">
+                                <span class="update-icon | icon">
+                                    <i class="solar-icons" stroke="2" icon-name="tv"></i>
+                                </span>
+
+                                <div class="update-text">
+                                    <div class="update-text-inner | grid-stack">
+                                        <b>watching</b>
+                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti dolore quidem suscipit?</p>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                            <li class="update-item">
+                                <span class="update-icon | icon">
+                                    <i class="solar-icons" stroke="2" icon-name="tv"></i>
+                                </span>
+
+                                <div class="update-text">
+                                    <div class="update-text-inner | grid-stack">
+                                        <b>watching</b>
+                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti dolore quidem suscipit?</p>
+                                    </div>
+                                </div>
+                            </li>
+
+
+
+                            <li class="update-item">
+                                <span class="update-icon | icon">
+                                    <i class="solar-icons" stroke="2" icon-name="tv"></i>
+                                </span>
+
+                                <div class="update-text">
+                                    <div class="update-text-inner | grid-stack">
+                                        <b>watching</b>
+                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti dolore quidem suscipit?</p>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                            <li class="update-item">
+                                <span class="update-icon | icon">
+                                    <i class="solar-icons" stroke="2" icon-name="tv"></i>
+                                </span>
+
+                                <div class="update-text">
+                                    <div class="update-text-inner | grid-stack">
+                                        <b>watching</b>
+                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti dolore quidem suscipit?</p>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                            <li class="update-item">
+                                <span class="update-icon | icon">
+                                    <i class="solar-icons" stroke="2" icon-name="tv"></i>
+                                </span>
+
+                                <div class="update-text">
+                                    <div class="update-text-inner | grid-stack">
+                                        <b>watching</b>
+                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti dolore quidem suscipit?</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div id="progress" aria-labelledby="tab-4" role="tabpanel" tabindex="-1" hidden>
+                    <div class="progress-wrapper">
+                        <ul class="progress-list | grid-stack">
+
+                            <li class="progress-item">
+                                <div class="progress-title">
+                                    <b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, laudantium.</b>
+                                    <p class="progress-text">
+                                        <span>episode</span>
+                                        <span>episode</span>
+                                    </p>
+                                </div>
+
+                                <div class="progress-bar" style="--progress-width: 50%"></div>
+                            </li>
+
+                            <li class="progress-item">
+                                <div class="progress-title">
+                                    <b>progress item title</b>
+                                    <p class="progress-text">
+                                        <span>episode</span>
+                                        <span>episode</span>
+                                    </p>
+                                </div>
+
+                                <div class="progress-bar" style="--progress-width: 50%"></div>
+                            </li>
+
+
+                            <li class="progress-item">
+                                <div class="progress-title">
+                                    <b>progress item title</b>
+                                    <p class="progress-text">
+                                        <span>episode</span>
+                                        <span>episode</span>
+                                    </p>
+                                </div>
+
+                                <div class="progress-bar" style="--progress-width: 50%"></div>
+                            </li>
+
+
+                            <li class="progress-item">
+                                <div class="progress-title">
+                                    <b>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus placeat et tempora.</b>
+                                </div>
+
+                                <div class="progress-bar" style="--progress-width: 50%"></div>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </main>
+
+    <div class="scroll-and-credit | bottom-right fixed grid-stack">
+        <button class="scroll-to-top | icon">
+            <i class="solar-icons" stroke="2" icon-name="chevron-up"></i>
+        </button>
+
+        <a href="http://pouthongwon.tumblr.com/" class="credit | icon" title="by pouthongwon">
+            <i class="solar-icons" stroke="2" icon-name="face-blep"></i>
+        </a>
+    </div>
+
+    <!-- tooltips script (cont.) -->
+    <script src="https://unpkg.com/popper.js@1"></script>
+    <script src="https://unpkg.com/tippy.js@5/dist/tippy-bundle.iife.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@5/dist/svg-arrow.css" />
+
+    <script>
+        const themeToggleButtons = document.querySelectorAll(".toggle");
+
+themeToggleButtons.forEach((btn) => {
+    btn.addEventListener("click", function () {
+
+        // Add theme-transition class for smooth transitions
+        document.documentElement.classList.add("theme-transition");
+
+        // Retrieve the current theme and determine the target theme
+        let currentTheme = document.documentElement.getAttribute("data-theme");
+        let targetTheme = (currentTheme === "light") ? "dark" : "light";
+
+        // Remove theme-transition class after a short delay
+        window.setTimeout(function () {
+            document.documentElement.classList.remove("theme-transition");
+        }, 50);
+
+        // Set the data-theme attribute and store in local storage
+        document.documentElement.setAttribute("data-theme", targetTheme);
+        localStorage.setItem("theme", targetTheme);
+    });
+});
+
+let tumblrControls = document.querySelector(".controls");
+
+tumblrControls.addEventListener('click', () => {
+    document.body.classList.toggle("show-iframe");
+});
+
+const tabElements = document.querySelectorAll('button[role="tab"]');
+const panelElements = document.querySelectorAll('[role="tabpanel"]');
+let activeIndex = 0;
+
+// Listen to clicks and key presses on tabs
+tabElements.forEach(function (tab, index) {
+  tab.addEventListener("click", function (event) {
+    setActiveTab(index);
+  });
+
+  tab.addEventListener("keydown", function (event) {
+    const lastIndex = tabElements.length - 1;
+
+    if (event.code === "ArrowLeft" || event.code === "ArrowUp") {
+      if (activeIndex === 0) {
+        // First element, jump to end
+        setActiveTab(lastIndex);
+      } else {
+        // Move left
+        setActiveTab(activeIndex - 1);
+      }
+    } else if (event.code === "ArrowRight" || event.code === "ArrowDown") {
+      if (activeIndex === lastIndex) {
+        // Last element, jump to beginning
+        setActiveTab(0);
+      } else {
+        // Move right
+        setActiveTab(activeIndex + 1);
+      }
+    } else if (event.code === "Home") {
+      // Move to beginning
+      setActiveTab(0);
+    } else if (event.code === "End") {
+      // Move to end
+      setActiveTab(lastIndex);
+    }
+  });
+});
+
+function setActiveTab(index) {
+  // Make currently active tab inactive
+  tabElements[activeIndex].setAttribute("aria-selected", "false");
+  tabElements[activeIndex].tabIndex = -1;
+
+  // Set the new tab as active
+  tabElements[index].setAttribute("aria-selected", "true");
+  tabElements[index].tabIndex = 0;
+  tabElements[index].focus();
+
+  setActivePanel(index);
+  activeIndex = index;
+}
+
+function setActivePanel(index) {
+  // Hide currently active panel
+  panelElements[activeIndex].setAttribute("hidden", "");
+  panelElements[activeIndex].tabIndex = -1;
+
+  // Show the new active panel
+  panelElements[index].removeAttribute("hidden");
+  panelElements[index].tabIndex = 0;
+}
+
+let customLinksBtn = document.querySelector(".image-and-links-btn");
+let linksList = document.querySelector(".extra-links-list");
+
+customLinksBtn.addEventListener('click', () => {
+  const isOpened = customLinksBtn.getAttribute('aria-expanded') === "true";
+
+  if(isOpened) {
+    customLinksBtn.setAttribute('aria-expanded', "false");
+    linksList.setAttribute('data-state', "closed");
+  } else {
+    customLinksBtn.setAttribute('aria-expanded', "true");
+    linksList.setAttribute('data-state', "opened");
+  }
+})
+
+let buttonContainer = document.querySelector(".scroll-and-credit");
+let scrollButton = document.querySelector(".scroll-to-top");
+
+window.onscroll = function() {
+    scrollFunction();
+}
+
+function scrollFunction() {
+    if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
+    buttonContainer.classList.add("show-scroll");
+    } else {
+    buttonContainer.classList.remove("show-scroll");
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+scrollButton.addEventListener('click', () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+});
+
+tippy('[title]', {
+    theme: 'custom',
+    arrow: tippy.roundArrow,
+    followCursor: true,
+    zIndex: 9999999999,
+    maxWidth: 260,
+
+    content(reference) {
+      const title = reference.getAttribute('title');
+      reference.removeAttribute('title');
+      return title;
+    },
+});
+    </script>
+</body>
+</html>
